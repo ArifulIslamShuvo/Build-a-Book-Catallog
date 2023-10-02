@@ -37,8 +37,16 @@ const updateIntoDB = async (
   });
   return exclude(result, ['password']);
 };
+const deleteFromDB = async (id: string): Promise<User> => {
+  return await prisma.user.delete({
+    where: {
+      id,
+    },
+  });
+};
 export const UserService = {
   getAllFromDB,
   getByIdFromDB,
   updateIntoDB,
+  deleteFromDB,
 };
