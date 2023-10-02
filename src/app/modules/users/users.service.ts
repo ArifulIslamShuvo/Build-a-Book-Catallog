@@ -6,6 +6,8 @@ import { exclude } from '../../../shared/utils';
 
 const getAllFromDB = async (): Promise<Omit<User, 'password'>[]> => {
   const users = await prisma.user.findMany();
+  //   console.log(users);
+
   return users.map(user => exclude(user, ['password']));
 };
 const getByIdFromDB = async (
@@ -23,7 +25,20 @@ const getByIdFromDB = async (
 
   return exclude(user, ['password']);
 };
+const updateIntoDB = async (
+  id: string,
+  payload: Partial<User>
+): Promise<Omit<User, 'password'> | null> => {
+  const result = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+  return exclude(result, ['password']);
+};
 export const UserService = {
   getAllFromDB,
   getByIdFromDB,
+  updateIntoDB,
 };
