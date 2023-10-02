@@ -13,5 +13,6 @@ router.post(
   auth(ENUM_USER_ROLE.ADMIN),
   BookController.insertIntoDB
 );
-
+router.get('/', BookController.getAllFromDB);
+router.get('/:id', BookController.getByIdFromDB);
 export const BookRoutes = router;
