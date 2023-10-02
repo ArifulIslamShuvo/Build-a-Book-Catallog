@@ -38,9 +38,18 @@ const updateIntoDB = async (
   });
 };
 
+const deleteFromDB = async (id: string): Promise<Category> => {
+  return await prisma.category.delete({
+    where: {
+      id,
+    },
+  });
+};
+
 export const CategoryService = {
   insertIntoDB,
   getAllFromDB,
   getByIdFromDB,
   updateIntoDB,
+  deleteFromDB,
 };
