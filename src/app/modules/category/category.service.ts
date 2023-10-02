@@ -15,7 +15,19 @@ const getAllFromDB = async (): Promise<Category[]> => {
   });
 };
 
+const getByIdFromDB = async (id: string): Promise<Category | null> => {
+  return await prisma.category.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      books: true,
+    },
+  });
+};
+
 export const CategoryService = {
   insertIntoDB,
   getAllFromDB,
+  getByIdFromDB,
 };
