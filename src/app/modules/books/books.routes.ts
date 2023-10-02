@@ -15,4 +15,10 @@ router.post(
 );
 router.get('/', BookController.getAllFromDB);
 router.get('/:id', BookController.getByIdFromDB);
+router.patch(
+  '/:id',
+  validateRequest(BookValidations.update),
+  auth(ENUM_USER_ROLE.ADMIN),
+  BookController.updateIntoDB
+);
 export const BookRoutes = router;
