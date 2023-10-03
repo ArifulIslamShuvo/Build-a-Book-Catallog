@@ -25,20 +25,32 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-const getByIdFromDBCustomer = catchAsync(
-  async (req: Request, res: Response) => {
-    const { id: userId } = req.user as { id: string };
-    const result = await OrderService.getByIdFromDBCustomer(userId);
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Customer Orders fetched successfully!',
-      data: result,
-    });
-  }
-);
+// const getByIdFromDBCustomer = catchAsync(
+//   async (req: Request, res: Response) => {
+//     const { id: userId } = req.user as { id: string };
+//     const result = await OrderService.getByIdFromDBCustomer(userId);
+//     sendResponse(res, {
+//       statusCode: httpStatus.OK,
+//       success: true,
+//       message: 'Customer Orders fetched successfully!',
+//       data: result,
+//     });
+//   }
+// );
+
+const getAllFromDBCustomer = catchAsync(async (req: Request, res: Response) => {
+  const { id: userId } = req.user as { id: string };
+  const result = await OrderService.getAllFromDBCustomer(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Customer Orders fetched successfully!',
+    data: result,
+  });
+});
 export const OrderController = {
   createOrder,
   getAllFromDB,
-  getByIdFromDBCustomer,
+  // getByIdFromDBCustomer,
+  getAllFromDBCustomer,
 };
