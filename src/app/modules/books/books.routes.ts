@@ -15,6 +15,9 @@ router.post(
 );
 router.get('/', BookController.getAllFromDB);
 router.get('/:id', BookController.getByIdFromDB);
+
+router.get('/:categoryId/category', BookController.getBooksByCategoryId);
+
 router.patch(
   '/:id',
   validateRequest(BookValidations.update),
