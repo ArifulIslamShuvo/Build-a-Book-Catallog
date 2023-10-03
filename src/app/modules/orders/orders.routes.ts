@@ -14,11 +14,9 @@ router.post(
 );
 router.get('/', auth(ENUM_USER_ROLE.ADMIN), OrderController.getAllFromDB);
 
-// Get all Orders for a Specific Customer
 router.get(
-  '/',
+  '/:id',
   auth(ENUM_USER_ROLE.CUSTOMER),
-  OrderController.getCustomerOrders
+  OrderController.getByIdFromDBCustomer
 );
-
 export const OrderRoutes = router;

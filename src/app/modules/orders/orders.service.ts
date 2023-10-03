@@ -42,8 +42,17 @@ const getCustomerOrders = async (customerId: string): Promise<Order[]> => {
     },
   });
 };
+
+const getByIdFromDBCustomer = async (userId: string): Promise<Order | null> => {
+  return await prisma.order.findFirst({
+    where: {
+      userId: userId,
+    },
+  });
+};
 export const OrderService = {
   createOrder,
   getAllFromDB,
   getCustomerOrders,
+  getByIdFromDBCustomer,
 };
