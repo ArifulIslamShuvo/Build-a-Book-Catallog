@@ -16,6 +16,40 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await OrderService.getAllFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Orders fetched successfully!',
+    data: result,
+  });
+});
+// const getCustomerOrders = catchAsync(async (req: Request, res: Response) => {
+//   const { id: userId } = req.user as { id: string };
+//   const result = await OrderService.getCustomerOrders(userId);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Customer orders retrieved successfully',
+//     data: result,
+//   });
+// });
+
+const getCustomerOrders = catchAsync(async (req: Request, res: Response) => {
+  const { id: userId } = req.user as { id: string };
+  const result = await OrderService.getCustomerOrders(userId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Customer orders retrieved successfully',
+    data: result,
+  });
+});
 export const OrderController = {
   createOrder,
+  getAllFromDB,
+  getCustomerOrders,
 };
