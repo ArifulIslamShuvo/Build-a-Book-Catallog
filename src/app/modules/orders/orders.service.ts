@@ -32,24 +32,7 @@ const getAllFromDB = async (): Promise<Order[]> => {
     },
   });
 };
-// const getCustomerOrders = async (customerId: string): Promise<Order[]> => {
-//   return await prisma.order.findMany({
-//     where: {
-//       userId: customerId,
-//     },
-//     include: {
-//       orderedBooks: true,
-//     },
-//   });
-// };
 
-// const getByIdFromDBCustomer = async (userId: string): Promise<Order | null> => {
-//   return await prisma.order.findFirst({
-//     where: {
-//       userId: userId,
-//     },
-//   });
-// };
 const getAllFromDBCustomer = async (userId: string): Promise<Order | null> => {
   return await prisma.order.findFirst({
     where: {
@@ -60,10 +43,37 @@ const getAllFromDBCustomer = async (userId: string): Promise<Order | null> => {
     },
   });
 };
+
+const getOrderByIdFromDB = async (
+  orderId: string,
+  role: string,
+  userId: string
+): Promise<Order | null> => {
+  if (role === 'admin') {
+    return await prisma.order.findFirst({
+      where: {
+        id: orderId,
+      },
+      include: {
+        orderedBooks: true,
+      },
+    });
+  } else {
+    return await prisma.order.findFirst({
+      where: {
+        id: orderId,
+        userId: userId,
+      },
+      include: {
+        orderedBooks: true,
+      },
+    });
+  }
+};
+
 export const OrderService = {
   createOrder,
   getAllFromDB,
-  // getCustomerOrders,
-  // getByIdFromDBCustomer,
   getAllFromDBCustomer,
+  getOrderByIdFromDB,
 };

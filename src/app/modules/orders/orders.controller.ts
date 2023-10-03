@@ -48,9 +48,22 @@ const getAllFromDBCustomer = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+const getOrderByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+  const { id: orderId } = req.params;
+  const { role, id: userId } = req.user as { role: string; id: string };
+  const result = await OrderService.getOrderByIdFromDB(orderId, role, userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Specific Orders fetched successfully!',
+    data: result,
+  });
+});
+
 export const OrderController = {
   createOrder,
   getAllFromDB,
-  // getByIdFromDBCustomer,
   getAllFromDBCustomer,
+  getOrderByIdFromDB,
 };
