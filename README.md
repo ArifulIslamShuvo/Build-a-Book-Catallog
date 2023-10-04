@@ -2,7 +2,7 @@
 
 ### Github Repository Link: https://github.com/ArifulIslamShuvo/Build-a-Book-Catallog
 
-### Deployed Live Link: 
+### Live Link: https://build-a-book-catallog.vercel.app/api
 
 # 
 ## Application Routes:
